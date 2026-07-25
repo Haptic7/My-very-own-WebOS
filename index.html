@@ -1,43 +1,228 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>My Personal OS - Welcome Screen</title>
-  </head>
-  <body style="background-color: #c9ffcf; color: #1a1a1a; font-family: Helvetica, Noto Sans, sans-serif; margin: 20px;">
-    
-    <h1 style="margin: 4px; padding: 4px; background-color: #000; color: #fff;">
-      Welcome to My OS
-    </h1>
-    
-    <h2 style="margin-top: 12px; margin-bottom: 8px;">
-      Introduction
-    </h2>
-    
-    <p>
-      Hello world! Welcome to my personalized, web based <strong>operating system</strong>. 
-      This is a one of a kind space designed to show off who I am and what I love to build.
-    </p>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SerenityOS - Personal Workspace</title>
+  <style>
+    /* Global Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #2b5876, #4e4376);
+      user-select: none;
+      transition: background 0.3s ease;
+    }
 
-    <p>
-      Here is a little <s>secret</s> detail: I love exploring new tech, listening to music, and creating unique projects! 
-      <br> Feel free to explore the links below.
-    </p>
+    /* Top Navigation Bar */
+    #top-bar {
+      height: 35px;
+      background-color: rgba(15, 15, 25, 0.85);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 15px;
+      color: #fff;
+      font-size: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
 
-    <p>
-      <dfn>Personal OS</dfn>: A web interface designed to interact with custom web applications and personal links.
-    </p>
+    /* NEW FEATURE: Theme Selector */
+    .theme-btn {
+      background: #4e4376;
+      color: white;
+      border: none;
+      padding: 4px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .theme-btn:hover {
+      background: #685b99;
+    }
 
-    <img 
-      src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=300&q=80" 
-      alt="Profile Image" 
-      style="width: 120px; height: 120px; object-fit: cover; border-radius: 50%; margin-top: 10px; margin-bottom: 10px;" 
-    />
+    /* Draggable Window Styling */
+    .window {
+      position: absolute;
+      width: 320px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
 
-    <br>
+    .window-header {
+      padding: 10px;
+      cursor: move;
+      background: #111;
+      color: #fff;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+    }
 
-    <a href="https://www.instagram.com/starthackclub/" target="_blank" style="color: #0056b3; font-weight: bold;">
-      Check out Hack Club on Instagram
-    </a>
+    .window-body {
+      padding: 15px;
+      color: #333;
+      max-height: 250px;
+      overflow-y: auto;
+      font-size: 13px;
+      line-height: 1.4;
+    }
 
-  </body>
+    /* Distinct positioning for windows */
+    #window-welcome { top: 60px; left: 40px; }
+    #window-devlogs { top: 80px; left: 400px; width: 380px; }
+    #window-widgets { top: 220px; left: 800px; width: 260px; }
+
+    img.profile-img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid #4e4376;
+      margin-bottom: 8px;
+    }
+
+    .devlog-entry {
+      background: #f0f2f5;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      border-left: 4px solid #4e4376;
+    }
+
+    .devlog-entry h4 {
+      margin: 0 0 4px 0;
+      color: #111;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="top-bar">
+    <div><strong>SerenityOS</strong> | Open Access (No Password Required)</div>
+    <div>
+      <span>Theme: </span>
+      <button class="theme-btn" onclick="setTheme('purple')">Purple Space</button>
+      <button class="theme-btn" onclick="setTheme('ocean')">Ocean Drive</button>
+      <button class="theme-btn" onclick="setTheme('dark')">Midnight</button>
+    </div>
+  </div>
+
+  <div id="window-welcome" class="window">
+    <div class="window-header">
+      <span> Welcome Screen</span>
+      <span>📌</span>
+    </div>
+    <div class="window-body">
+      <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=300&q=80" alt="Profile" class="profile-img" />
+      <h3 style="margin: 4px 0;">Hey, I'm Alex! 👋</h3>
+      <p>Welcome to my custom Web OS! Built from scratch using HTML, CSS, and JS.</p>
+      <p><dfn>Personal OS</dfn>: A browser-based dashboard to showcase projects, progress, and links.</p>
+      <a href="https://www.instagram.com/starthackclub/" target="_blank" style="color: #4e4376; font-weight: bold;">Check out Hack Club</a>
+    </div>
+  </div>
+
+  <div id="window-devlogs" class="window">
+    <div class="window-header">
+      <span> Build Log / Devlogs</span>
+      <span>📜</span>
+    </div>
+    <div class="window-body">
+
+      <div class="devlog-entry">
+        <h4>Devlog #1: Laying the Foundation</h4>
+        <small><em>July 2026</em></small>
+        <p>Created basic HTML structure, added heading tags, paragraphs, and imported my profile image using CSS <code>object-fit: cover</code>.</p>
+      </div>
+
+      <div class="devlog-entry">
+        <h4>Devlog #2: Styling & Window UI</h4>
+        <small><em>July 2026</em></small>
+        <p>Transformed the static page into a floating desktop interface with styled window headers, custom padding, and background gradients.</p>
+      </div>
+
+      <div class="devlog-entry">
+        <h4>Devlog #3: Draggable Windows & Theme Engine</h4>
+        <small><em>July 2026</em></small>
+        <p>Added JavaScript drag handlers so windows move freely! Added a dynamic desktop theme switcher feature to customize the background on the fly.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="window-widgets" class="window">
+    <div class="window-header">
+      <span> OS Widgets</span>
+      <span>⚙️</span>
+    </div>
+    <div class="window-body">
+      <p><strong>System Status:</strong> Online 🟢</p>
+      <p><strong>Auth Mode:</strong> Public Demo (No Password Needed)</p>
+      <hr>
+      <p><em>Try dragging any of these windows around the screen!</em></p>
+    </div>
+  </div>
+
+  <script>
+    // NEW FEATURE: Dynamic Theme Switcher Function
+    function setTheme(theme) {
+      if (theme === 'purple') {
+        document.body.style.background = 'linear-gradient(135deg, #2b5876, #4e4376)';
+      } else if (theme === 'ocean') {
+        document.body.style.background = 'linear-gradient(135deg, #2193b0, #6dd5ed)';
+      } else if (theme === 'dark') {
+        document.body.style.background = 'linear-gradient(135deg, #0f2027, #203a43, #2c5364)';
+      }
+    }
+
+    // Draggable Window Logic
+    function makeDraggable(element) {
+      let posX = 0, posY = 0, initialX = 0, initialY = 0;
+      const header = element.querySelector('.window-header');
+
+      if (header) {
+        header.onmousedown = dragMouseDown;
+      }
+
+      function dragMouseDown(e) {
+        e.preventDefault();
+        initialX = e.clientX;
+        initialY = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+
+        // Bring active window to front
+        document.querySelectorAll('.window').forEach(w => w.style.zIndex = 1);
+        element.style.zIndex = 10;
+      }
+
+      function elementDrag(e) {
+        e.preventDefault();
+        posX = initialX - e.clientX;
+        posY = initialY - e.clientY;
+        initialX = e.clientX;
+        initialY = e.clientY;
+        element.style.top = (element.offsetTop - posY) + "px";
+        element.style.left = (element.offsetLeft - posX) + "px";
+      }
+
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+
+    // Apply drag behavior to all windows
+    document.querySelectorAll('.window').forEach(makeDraggable);
+  </script>
+
+</body>
 </html>
